@@ -1,0 +1,12 @@
+<div class="card">
+        <div class="card-header">
+            <h4>{{title}}</h4>
+        </div>
+        <div class="card-body pb-3">
+            <div id="{{'hist' + id}}" #chart></div>
+            <label class="bold mb-0 mr-3">Number of bins</label>
+                <button class="btn mr-1" *ngFor="let bin of binOptions" [ngClass]="{'btn-primary': selectedBin === bin, 'btn-light': selectedBin !== bin}" (click)="binClicked(bin)">
+                    {{bin}}
+                </button>
+        </div>
+    </div>

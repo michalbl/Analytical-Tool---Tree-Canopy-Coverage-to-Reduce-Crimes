@@ -1,0 +1,138 @@
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="m-2">
+            <app-map id="plan1" [title]="'Planned Canopy Coverage'" [data]="mapData" [displayVar]="'CANOPY'" [showHandCursor]="true" [instructions]="'Click on LSOAs to plan canopy cover change'" [scaleType]="scale" (areaClicked)="areaClicked($event)" #planMap></app-map>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="m-2">
+            <app-map id="plan0" [title]="'Predicted Violence Crime Rates'" [data]="mapData" [displayVar]="'CRIME'" [instructions]="'Map will be updated based on planned canopy cover changes'" [scaleType]="scale" #predictMap></app-map>
+        </div>
+    </div>
+</div>
+<div class="row mt-2 mb-2" *ngIf="hasFilterLsoas">
+    <div class="col-lg-12 mb-2">
+        <div class="float-right">
+            <button class="btn btn-info pull-right" (click)="resetClicked()" >
+                Reset
+            </button>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <alert type="info">
+            List of Planned Canopy Cover Changes:
+        </alert>
+    </div>
+</div>
+<div class="row" *ngIf="hasFilterLsoas">
+    <div class="col-md-12">
+        <div class="list-group">
+            <div class="list-group-item bg-primary">
+                <div class="row">
+                    <div class="col-md-2 text-white">LSOA Code/Name</div>
+                    <div class="col-md-3 text-white">Actual Data</div>
+                    <div class="col-md-3 text-white">Model Crime Rate</div>
+                    <div class="col-md-4 text-white">Predicted Crime Rate</div>
+                </div>
+            </div>
+            <div class="list-group-item" *ngFor="let item of filterPlannedLosas()">
+                <div class="row">
+                    <div class="col-md-2">{{item.id}}<br>{{item.name}}</div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-9 bold">
+                                Actual Canopy Percentage:<br>
+                                Actual # of Violent Incidents:<br>
+                                Actual Violent Incidents per 1000 Residents:<br>
+                                <!-- Actual Violence Crime Rate (Log): -->
+                            </div>
+                            <div class="col-md-3 text-right">
+                                {{item.canopyPercent.toFixed(2)}}%<br>
+                                {{item.totalCrimes.toFixed(2)}}<br>
+                                {{item.crimeRate.toFixed(2)}}<br>
+                                <!-- {{item.crimeRateLog.toFixed(2)}}<br> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-9 bold">
+                                Actual Canopy Percentage:<br>
+                                Model # of Violent Incidents:<br>
+                                Model Violent Incidents per 1000 Residents:<br>
+                                <!-- Actual Violence Crime Rate (Log): -->
+                            </div>
+                            <div class="col-md-3 text-right">
+                                {{item.canopyPercent.toFixed(2)}}%<br>
+                                <span class="red">{{item.modelTotalCrimes.toFixed(2)}}</span><br>
+                                {{item.modelCrimeRate.toFixed(2)}}<br>
+                                <!-- {{item.crimeRateLog.toFixed(2)}}<br> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-9 bold">
+                                Planned Canopy Percentage:<br>
+                                Predicted # of Voilent Incidents:<br>
+                                Predicted Violent Incidents per 1000 Residents:<br>
+                                <!-- Predicted Violence Crime Rate (Log): -->
+                            </div>
+                            <div class="col-md-3 text-right pr-3">
+                                <span class="red">{{item.plannedCanopyPercent.toFixed(2)}}%</span><br>
+                                <span class="red">{{item.predictedTotalCrimes.toFixed(2)}}</span><br>
+                                {{item.predictedCrimeRate.toFixed(2)}}<br>
+                                <!-- {{item.predictedCrimeRateLog.toFixed(2)}}<br> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" bsModal #modal="bs-modal"
+     tabindex="-1" role="dialog" aria-labelledby="dialog-events-name">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-events-name" class="modal-title pull-left">Planned Vegetation Change</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <table>
+                <tr>
+                    <td class="title pr-3">LSOA Code</td>
+                    <td>{{selectedLsoa.id}}</td>
+                </tr>
+                <tr>
+                    <td class="title pr-3">LSOA Name</td>
+                    <td>{{selectedLsoa.name}}</td>
+                </tr>
+                <tr>
+                    <td class="title pr-3">Canopy Coefficient</td>
+                    <td>{{selectedLsoa?.canopyPercentBeta?.toFixed(4)}}
+                         <i class="fa fa-info-circle text-primary" tooltip="Predicts {{(selectedLsoa?.canopyPercentBeta * 100 * (selectedLsoa?.canopyPercentBeta > 0 ? 1 : -1)).toFixed(2)}}% {{selectedLsoa?.canopyPercentBeta > 0 ? 'increase' : 'decrease'}} in crimes of violence against the person per a 1% increase in canopy cover"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title pr-3">Actual Canopy</td>
+                    <td>{{selectedLsoa?.canopyPercent?.toFixed(2)}}%</td>
+                </tr>
+                <tr>
+                    <td class="title pr-3">Planned Canopy</td>
+                    <td><input type="number" step="0.1" max="100" min="0" name="" id="" [(ngModel)]="plannedValue"> %</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="pt-2 pr-3"><button class="btn btn-success" (click)="submitClicked()">
+                        Submit
+                    </button> </td>
+                </tr>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="card mb-4">
+    <div class="card-header">
+        Filters
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="bold display-block mb-0">Crime types</label>
+                    <button class="btn mr-1 mb-1" [ngClass]="{'btn-primary': allCrimes, 'btn-light': !allCrimes}" (click)="allCrimes = !allCrimes">
+                        All Crime Types
+                    </button>
+                    <button class="btn mr-1 mb-1" *ngFor="let crime of crimeTypes" [ngClass]="{'btn-primary': crime.checked, 'btn-light': !crime.checked}" (click)="crime.checked = !crime.checked" [disabled]="allCrimes">
+                        {{crime.name}}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <label class="bold display-block mb-0">Crime rate scale</label>
+                <button class="btn mr-1" *ngFor="let scale of scales" [ngClass]="{'btn-primary': selectedScale === scale.id, 'btn-light': selectedScale !== scale.id}" (click)="selectedScale = scale.id">
+                        {{scale.name}}
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center pr-3">
+                    <button class="btn btn-success" (click)="submitClicked()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="showComps">
+    <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="m-1">
+            <app-map id="discover1" [title]="'Vegetation Percentage'" [data]="vegData" [displayVar]="'VEG'"></app-map>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="m-1">
+            <app-map id="discover0" [title]="'Crime Rate'" [data]="crimeData" [scaleType]="selectedScaleName" [displayVar]="'CRIME'"></app-map>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="showComps">
+    <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="m-1">
+            <app-histogram id="plot3" [title]="histogramTitle" [data]="histogramData"></app-histogram>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-6">
+        <div class="m-1">
+            <app-scatter-plot id="plot3" [title]="regressionTitle" [xTitle]="regressionXTitle" [yTitle]="regressionYTitle" [data]="regressionData"></app-scatter-plot>
+        </div>
+    </div>
+</div>

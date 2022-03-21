@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+.bold {
+    font-weight: bold;
+}
+.display-block {
+    display: block;
+}
+.display-inline-block {
+    display: inline-block;
+}
+.lsoa {
+    stroke: #000;
+    stroke-width: 0.3px;
+  }
+.borough {
+  fill:none;
+  stroke: #000;
+  stroke-width: 1px;
+}
+.bordered {
+    border: 2px #343a40 solid;
+    border-radius: 10px;
+}

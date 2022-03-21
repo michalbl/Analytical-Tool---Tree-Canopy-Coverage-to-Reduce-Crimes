@@ -1,0 +1,49 @@
+<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar bg-dark">
+  <a class="navbar-brand mr-0 mr-md-2" aria-label="Bootstrap">
+      <i class="fa fa-lg fa-tree text-success"></i>  London Vegetation Coverage -  Crime Rate Analysis  <i class="fa fa-lg fa-shield-alt"></i>
+  </a>
+</header>
+<div class="container-fluid mt-3">
+  <tabset [justified]="true">
+    <tab>
+      <ng-template tabHeading>
+        <i class="fa fa-2x fa-home"></i> <small class="muted pl-2">Home</small>
+      </ng-template>
+      <div class="card">
+        <div class="card-body">
+          <app-home></app-home>
+        </div>
+      </div>
+    </tab>
+    <tab>
+      <ng-template tabHeading>
+        <i class="fa fa-2x fa-search"></i> <small class="muted pl-2">Discover</small>
+      </ng-template>
+      <div class="card">
+        <div class="card-body">
+          <app-discover></app-discover>
+        </div>
+      </div>
+    </tab>
+    <!-- <tab>
+      <ng-template tabHeading>
+        <i class="fa fa-2x fa-cogs"></i> <small class="muted pl-2">Our Model</small>
+      </ng-template>
+      <div class="card">
+        <div class="card-body">
+          <app-model></app-model>
+        </div>
+      </div>
+    </tab> -->
+    <tab>
+      <ng-template tabHeading>
+        <i class="fa fa-2x fa-seedling"></i> <small class="muted pl-2">Planning</small>
+      </ng-template>
+      <div class="card">
+        <div class="card-body">
+          <app-plan></app-plan>
+        </div>
+      </div>
+    </tab>
+  </tabset>
+</div>
