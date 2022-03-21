@@ -1,29 +1,23 @@
 Impact of Tree Coverage on London Crime Rates - Predictive Model and Planning Tool
 
 The objective is to provide a reliable analytical solution that could help authorities in London to reduce law violation levels. In particular, we would like to:
-(1) Analyze crime rates on the neighborhood
-(LSOA1) level in Greater London,
-(2) Build a model to find an association between
-crime rates and tree canopy cover,
-(3) Create an analytical tool for London landscape
-planners aiming to decrease crime rates.
+(1) Analyze crime rates on the neighborhood (LSOA1) level in Greater London,
+(2) Build a model to find an association between crime rates and tree canopy cover,
+(3) Create an analytical tool for London landscape planners aiming to decrease crime rates.
 Importantly, our analysis will be done, for the first time, on the neighborhood level - the average population
 of an LSOA in London in 2010 was only ca. 2000 inhabitants and London is split to more than 4000 area such units.
 
 
-
+----------------------------------------------------------------------------------------------------------------------------------------
 For the 90% of users who only want to consume the final output: 
     Download the .zip file and unpack it
     In cmd.exe, Anaconda prompt or Mac Terminal navigate to team44final/CODE/Vis/compiled and
     enter the command python -m http.server 8000. Depending on your installation, you should use python3 -m http.server 8000
-    Open a web browser and go to localhost:8000
-
+    Open a web browser and go to localhost:800
 ----------------------------------------------------------------------------------------------------------------------------------------
+
+
 Below are the instructions for the DataPrep and Modeling stages for those who wish to perform the full pipeline and recreate the results.
-Throughout the guide, for python commands, check whether the keyword to run python on your PC is "python" or "python3".
-----------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------
-
 
 DESCRIPTION
 -----------
