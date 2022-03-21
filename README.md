@@ -1,22 +1,33 @@
 ## Impact of Tree Coverage on London Crime Rates - Predictive Model and Planning Tool
 
 The objective is to provide a reliable analytical solution that could help authorities in London to reduce law violation levels. In particular, we would like to:
+
 (1) Analyze crime rates on the neighborhood (LSOA1) level in Greater London,
+
 (2) Build a model to find an association between crime rates and tree canopy cover,
+
 (3) Create an analytical tool for London landscape planners aiming to decrease crime rates.
+
 Importantly, our analysis will be done, for the first time, on the neighborhood level - the average population
 of an LSOA in London in 2010 was only ca. 2000 inhabitants and London is split to more than 4000 area such units.
 
-![](Tool.png)
+<img src="Tool.png" width="800" height="500">
 
 
-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 For the 90% of users who only want to consume the final output: 
-    Download the .zip file and unpack it
-    In cmd.exe, Anaconda prompt or Mac Terminal navigate to team44final/CODE/Vis/compiled and
-    enter the command python -m http.server 8000. Depending on your installation, you should use python3 -m http.server 8000
-    Open a web browser and go to localhost:800
-----------------------------------------------------------------------------------------------------------------------------------------
+   
+  - Download the .zip file and unpack it
+   
+  - In cmd.exe, Anaconda prompt or Mac Terminal navigate to team44final/CODE/Vis/compiled and
+   
+  - enter the command python -m http.server 8000. Depending on your installation, you should use python3 -m http.server 8000
+   
+  - Open a web browser and go to localhost:800
+
 
 
 Below are the instructions for the DataPrep and Modeling stages for those who wish to perform the full pipeline and recreate the results.
@@ -38,7 +49,9 @@ INSTALLATION
 ------------
 - Data preparation:
 >> pip install fastkml
+>> 
 >> pip install google-cloud-bigquery
+
 Other libraries should be available.
 - Next, download land-registry-house-prices-LSOA.csv file (84.62 MB) from https://data.london.gov.uk/dataset/average-house-prices and save it in "data" folder. 
 - Then, download gla-lsoa-kml-files.zip file from https://data.london.gov.uk/dataset/curio-canopy (21.24 MB). 
@@ -51,8 +64,7 @@ DataPrep.py accepts one argument which is the path to authentication json file.
 Modeling
 - In Anaconda powershell prompt:
 >> conda install -c conda-forge mgwr
-Note: conda is highly recommended for mgwr installation, especially on Windows, as other methods (e.g. pip) are more complex, due to its prerequisites. See:
-https://geoffboeing.com/2014/09/using-geopandas-windows/
+
 - Optional - for reviewing the QGIS project used to generate the coefficient map (for the report only, not for project visualization), QGIS is freeware that can be installed from: https://qgis.org/en/site/forusers/download.html
 
 Visualization
@@ -71,6 +83,7 @@ Data preparation
 Modeling
 - From the command line, in the Code/Model folder: 
 >> python3 GWR_prediction_LSOA_violence.py
+
 The python script expects to find its input file (VegetationCrimesModel.csv), in the relative location as in the download (..\DataPrep\VegetationCrimesModel.csv)
 
 Visualization
